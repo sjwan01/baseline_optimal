@@ -12,9 +12,9 @@ from ._classifier import _instantiate_estimator
 class ClassificationStudy:
 
     def __init__(self):
-        self.study = None
-        self.best_pipeline = None
-        self.best_score = None
+        self._study = None
+        self._best_pipeline = None
+        self._best_score = None
 
     def _instantiate_pipeline(trial, numerical_features, categorical_features, select=False):
         processor = _instantiate_processor(
@@ -44,15 +44,15 @@ class ClassificationStudy:
             return np.min([np.mean(scores), np.median([scores])])
 
         op.logging.set_verbosity(op.logging.WARNING)
-        self.study = op.create_study(study_name=study_name, direction='maximize')
-        self.study.optimize(lambda trial: objective(self, trial, X, y), n_trials=n_trials)
-        self.best_pipeline = self._instantiate_pipeline(self.study.best_trial, numerical_features, categorical_features, select)
+        self._study = op.create_study(study_name=study_name, direction='maximize')
+        self._study.optimize(lambda trial: objective(self, trial, X, y), n_trials=n_trials)
+        self._best_pipeline = self._instantiate_pipeline(self._study.best_trial, numerical_features, categorical_features, select)
 
     def fit(self, X, y):
-        self.best_pipeline.fit(X, y)
+        self._best_pipeline.fit(X, y)
 
     def evaluate(self, X, y, threshold=0.5):
-        pred_y_proba = self.best_pipeline.predict_proba(X)[:, 1]
+        pred_y_proba = self._best_pipeline.predict_proba(X)[:, 1]
         scores = {
             'AUC-ROC': roc_auc_score(y, pred_y_proba),
             'Accuracy': accuracy_score(y, pred_y_proba >= threshold),
@@ -64,22 +64,22 @@ class ClassificationStudy:
         return pred_y_proba, pd.DataFrame(scores).iloc[0,:].to_frame().T.round(4)
 
     def plot_optimization_history(self):
-        return op.visualization.plot_optimization_history(self.study)
+        return op.visualization.plot_optimization_history(self._study)
 
     def plot_param_importances(self):
-        return op.visualization.plot_param_importances(self.study)
+        return op.visualization.plot_param_importances(self._study)
 
     def plot_feature_importances(self, X):
-        explainer = sp.Explainer(self.best_pipeline[-1])
-        X_transformed = self.best_pipeline[0].transform(X)
-        feature_names = [feature.split('__')[1] for feature in self.best_pipeline[0].get_feature_names_out()]
+        explainer = sp.Explainer(self._best_pipeline[-1])
+        X_transformed = self._best_pipeline[0].transform(X)
+        feature_names = [feature.split('__')[1] for feature in self._best_pipeline[0].get_feature_names_out()]
         shap_values = explainer.shap_values(X_transformed)
         return sp.summary_plot(shap_values, X_transformed, feature_names)
     
     @property
     def best_pipeline(self):
-        return self.best_pipeline
+        return self._best_pipeline
 
     @property
     def best_score(self):
-        return self.best_score
+        return self._best_score
