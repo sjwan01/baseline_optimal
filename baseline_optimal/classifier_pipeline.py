@@ -27,7 +27,7 @@ class ClassificationStudy:
         ])
         return pipeline
 
-    def optimize(self, trial, X, y, metric='accuracy', select=False, study_name='optimization', cv=5, n_trials=100):
+    def optimize(self, X, y, metric='accuracy', select=False, study_name='optimization', cv=5, n_trials=100):
 
         numerical_features = [
             *X.select_dtypes(exclude=['object', 'category']).columns
@@ -36,7 +36,7 @@ class ClassificationStudy:
             *X.select_dtypes(include=['object', 'object']).columns
         ]
 
-        def objective(self):
+        def objective(self, trial):
             pipeline = self._instantiate_pipeline(
                 trial, numerical_features, categorical_features, select
             )
