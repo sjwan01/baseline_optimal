@@ -13,7 +13,7 @@ from ._processor import _instantiate_processor
 from ._classifier import _instantiate_estimator
 
 
-class OptimalBaseClassifier:
+class ClassTask:
     """A class for optimizing and evaluating a machine learning classifier using Optuna.
 
     Attributes:
@@ -57,7 +57,7 @@ class OptimalBaseClassifier:
 
     def __init__(self):
         """
-        Initialize an instance of OptimalBaseClassifier.
+        Initialize an instance of ClassTask.
 
         Attributes:
         - _study (optuna.study.Study): Optuna study for hyperparameter optimization.

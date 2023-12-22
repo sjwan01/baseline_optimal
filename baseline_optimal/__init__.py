@@ -1,1 +1,1 @@
-from .classifier_pipeline import OptimalBaseClassifier
+from .classifier_pipeline import ClassTask
