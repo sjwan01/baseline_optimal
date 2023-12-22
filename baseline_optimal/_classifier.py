@@ -98,11 +98,9 @@ def _instantiate_xgboost(trial: Trial) -> XGBClassifier:
     - XGBClassifier: An instance of the XGBClassifier class.
     """
     params = {
-        'eta': trial.suggest_float('xgb_eta', 0, 0.1),
+        'learning_rate': trial.suggest_float('xgb_learning_rate', 0, 0.1),
         'n_estimators': trial.suggest_int('xgb_n_estimators', 100, 300),
-        'max_features': trial.suggest_categorical('xgb_max_features', ['log2', 'sqrt', None]),
         'max_depth': trial.suggest_int('xgb_max_depth', 5, 10),
-        'min_samples_split': trial.suggest_int('xgb_min_sample_split', 2, 10),
         'random_state': 123
     }
     return XGBClassifier(**params)
