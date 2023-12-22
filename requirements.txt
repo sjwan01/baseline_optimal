@@ -1,6 +1,7 @@
 pandas
 numpy
 scikit-learn
+seaborn
 imblearn
 category_encoders
 xgboost

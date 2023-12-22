@@ -1,1 +1,1 @@
-from .classifier_pipeline import ClassificationStudy
+from .classifier_pipeline import OptimalBaseClassifier
