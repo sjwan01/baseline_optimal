@@ -24,15 +24,34 @@ import baseline_optimal
 
 ## Documentation
 
+Access the the entire documentation through [GitHub Pages](https://sjwan01.github.io/baseline_optimal/).
+
 Check out `baseline_optimal` modules available and their respective documentation as well as example.
+
+<div align="center">
 
 | Modules | Task | Documentation | Example |
 | - | - |-- | - |
-| `baseline_optimal.class_task` | classification | [**Link**]() | [**Link**]() |
+| `baseline_optimal.class_task` | classification | [**Link**](https://sjwan01.github.io/baseline_optimal/class_task.html) | [**Link**]() |
 
+</div>
+
+Check out machine learning algorithms supported and hyperparameters considered.
+
+<div align="center">
+
+| Algorithm | Source | Hyperparameters |
+| - | - | - |
+| `DecisionTreeClassifier` | `sklearn.tree` | `max_features`<br>`max_depth`<br>`min_samples_split` |
+| `RandomForestClassifier` | `sklearn.ensemble` | `n_estimators`<br>`max_features`<br>`max_depth`<br>`min_samples_split` |
+| `AdaBoostClassifier` | `sklearn.ensemble` | `n_estimators`<br>`learning_rate` |
+| `XGBClassifier` | `xgboost` | `n_estimators`<br>`learning_rate`<br>`max_depth` |
+
+</div>
 
 <!-- ## TODO
 
+- random state config
 - classification tasks with imbalanced data
 - regression tasks
 - trial pruning
