@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>baseline_optimal package &mdash; Baseline Optimal 0.0.5 documentation</title>
+  <title>baseline_optimal.class_task &mdash; Baseline Optimal 0.0.5 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="baseline_optimal" href="modules.html" /> 
+    <link rel="prev" title="Baseline Optimal Documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,15 +43,25 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">baseline_optimal</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">baseline_optimal package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-baseline_optimal.class_task">baseline_optimal.class_task module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask"><code class="docutils literal notranslate"><span class="pre">ClassTask</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">baseline_optimal.class_task</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-baseline_optimal.class_task">Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask"><code class="docutils literal notranslate"><span class="pre">ClassTask</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.best_pipeline"><code class="docutils literal notranslate"><span class="pre">ClassTask.best_pipeline</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.best_score"><code class="docutils literal notranslate"><span class="pre">ClassTask.best_score</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.evaluate"><code class="docutils literal notranslate"><span class="pre">ClassTask.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.optimize"><code class="docutils literal notranslate"><span class="pre">ClassTask.optimize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_confusion_matrix"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_confusion_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_feature_importances"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_feature_importances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_optimization_history"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_optimization_history()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_param_importances"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_param_importances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_pr_curve"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_pr_curve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_roc_curve"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_roc_curve()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.predict"><code class="docutils literal notranslate"><span class="pre">ClassTask.predict()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-baseline_optimal">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -72,10 +82,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">baseline_optimal</a></li>
-      <li class="breadcrumb-item active">baseline_optimal package</li>
+      <li class="breadcrumb-item active">baseline_optimal.class_task</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/baseline_optimal.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/class_task.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -83,10 +92,52 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="baseline-optimal-package">
-<h1>baseline_optimal package<a class="headerlink" href="#baseline-optimal-package" title="Link to this heading"></a></h1>
+  <section id="baseline-optimal-class-task">
+<h1>baseline_optimal.class_task<a class="headerlink" href="#baseline-optimal-class-task" title="Link to this heading"></a></h1>
+<p>The module currently supports classification tasks given balanced dataset.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>To prepare your data, make sure to:</p>
+<ol class="arabic simple">
+<li><p>Remove features that machine learning models can’t process, such as names and zip codes.</p></li>
+<li><p>Split the training and the test data, and encode the target variable if necessary,</p></li>
+</ol>
+<p>To start with, declare a <code class="docutils literal notranslate"><span class="pre">ClassTask</span></code> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">baseline_optimal</span> <span class="kn">import</span> <span class="n">ClassTask</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">ClassTask</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Search through the parameter space and optimize for the accuracy score by default. Other supported metrics for classification tasks can be found through <a class="reference external" href="https://scikit-learn.org/stable/modules/model_evaluation.html">sklearn</a>.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">select=True</span></code> when the dataset is large to enable feature selection prior to fitting models. This can speed up the optimization process by using a subset of the feature space, but it may lead to suboptimal results given relatively smaller dataset.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cv</span></code> defines the number of folds within each iteration, and it can also take a <a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html">CV splitter</a>. The <code class="docutils literal notranslate"><span class="pre">optimize</span></code> function aims to discover the optimal machine learning pipeline, incorporating the best data processor and estimator with optimized hyperparameters. Subsequently, it fits this optimal pipeline to the training data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">task</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">study_name</span><span class="o">=</span><span class="s1">&#39;optimization&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_trials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Access the best CV score.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">best_score</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After fitting the data, one option is to use the <code class="docutils literal notranslate"><span class="pre">ClassTask</span></code> object for probability estimates and evaluation on the test set. You may customize the classification threshold.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_prob</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or, you may obtain the optimal <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> object. Check <a class="reference external" href="https://imbalanced-learn.org/stable/references/generated/imblearn.pipeline.Pipeline.html">here</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_pipeline</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_pipeline</span>
+
+<span class="n">pred_prob</span> <span class="o">=</span> <span class="n">best_pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">best_processor</span> <span class="o">=</span> <span class="n">best_pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;processor&#39;</span><span class="p">]</span>
+<span class="n">best_estimator</span> <span class="o">=</span> <span class="n">best_pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;estimator&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Obtain the <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> object will allow you to do much more. The <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> object is returned here to allow resampling for imbalanced data during optimization in future versions. It shares similar API with <code class="docutils literal notranslate"><span class="pre">sklearn.pipeline.Pipeline</span></code>.</p>
+</section>
 <section id="module-baseline_optimal.class_task">
-<span id="baseline-optimal-class-task-module"></span><h2>baseline_optimal.class_task module<a class="headerlink" href="#module-baseline_optimal.class_task" title="Link to this heading"></a></h2>
+<span id="documentation"></span><h2>Documentation<a class="headerlink" href="#module-baseline_optimal.class_task" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="baseline_optimal.class_task.ClassTask">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baseline_optimal.class_task.</span></span><span class="sig-name descname"><span class="pre">ClassTask</span></span><a class="reference internal" href="_modules/baseline_optimal/class_task.html#ClassTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baseline_optimal.class_task.ClassTask" title="Link to this definition"></a></dt>
@@ -250,16 +301,13 @@ Optuna library. Use 5-fold cross validation by default.</p>
 </dd></dl>
 
 </section>
-<section id="module-baseline_optimal">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-baseline_optimal" title="Link to this heading"></a></h2>
-</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="baseline_optimal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Baseline Optimal Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
