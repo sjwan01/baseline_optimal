@@ -57,7 +57,7 @@ pred_prob = study.predict(X = X_test)
 scores = study.evaluate(X = X_test, y_true = y_test, threshold = 0.5)
 ```
 
-Or, you may obtain the optimal [`Pipeline`](https://imbalanced-learn.org/stable/references/generated/imblearn.pipeline.Pipeline.html) object.
+Or, you may obtain the optimal [`imblearn.pipeline.Pipeline`](https://imbalanced-learn.org/stable/references/generated/imblearn.pipeline.Pipeline.html) object.
 
 ```python
 best_pipeline = study.best_pipeline
@@ -68,29 +68,7 @@ best_processor = best_pipeline.named_steps['processor']
 best_estimator = best_pipeline.named_steps['estimator']
 ```
 
-Visualizations concerning the model performance.
-
-```python
-study.plot_roc_curve(X = X_test, y_true = y_test)
-
-study.plot_pr_curve(X = X_test, y_true = y_test)
-
-study.plot_confusion_matrix(X = X_test, y_true = y_test, threshold = 0.5)
-```
-
-Visualizations concerning the optimization.
-
-```python
-study.plot_optimization_history()
-
-study.plot_param_importances()
-```
-
-Plot feature importances based on the SHAP values.
-
-```python
-study.plot_feature_importances(X = X_test)
-```
+You may access the sketchy documentation [here](https://sjwan01.github.io/baseline_optimal/) to see what can be visualized.
 
 ---
 

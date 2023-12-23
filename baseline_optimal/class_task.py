@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import imblearn
 import optuna as op
 import shap as sp
 from optuna import Trial
@@ -48,7 +49,7 @@ class ClassTask:
         ]
 
         def instantiate_pipeline(trial: Trial, numerical_features: List[str],
-         categorical_features: List[str], select: bool=False) -> Pipeline:
+         categorical_features: List[str], select: bool=False) -> imblearn.pipeline.Pipeline:
             processor = _instantiate_processor(
                 trial, numerical_features, categorical_features, select
             )
@@ -194,7 +195,7 @@ class ClassTask:
         sp.summary_plot(shap_values, X_transformed, feature_names)
     
     @property
-    def best_pipeline(self) -> Pipeline:
+    def best_pipeline(self) -> imblearn.pipeline.Pipeline:
         """
         Get the optimal machine learning pipeline obtained from optimization.
 
