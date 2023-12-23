@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import sphinx
 sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -22,7 +23,7 @@ copyright = '2023, Shunji Wan'
 author = 'Shunji Wan'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.4'
+release = '0.0.5'
 
 
 # -- General configuration ---------------------------------------------------
