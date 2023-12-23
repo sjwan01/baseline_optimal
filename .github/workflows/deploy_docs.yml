@@ -1,4 +1,4 @@
-name: Publish Documentation to GitHub Pages
+name: Build and Deploy Docs
 
 on:
   push:
@@ -6,28 +6,31 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Setup Python
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
 
     - name: Install Dependencies
       run: |
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r docs/requirements.txt  # Adjust the path if your requirements file is in a different location
 
-    - name: Build Documentation
+    - name: Build Docs
       run: |
-        make -C docs html
+        cd docs
+        make html  # Replace with your Sphinx build command
 
-    - name: Publish to GitHub Pages
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/build
+        publish_dir: docs/_build/html
