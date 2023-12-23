@@ -23,11 +23,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install sphinx
 
     - name: Build Docs
       run: |
         cd docs
-        make html  # Replace with your Sphinx build command
+        make html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
