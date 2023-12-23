@@ -10,5 +10,5 @@ docs/_templates/
 docs/*.html
 docs/*.pdf
 .gitignore/
-.github/
+# .github/
 !pyproject.toml
