@@ -5,7 +5,7 @@ import seaborn as sns
 import optuna as op
 import shap as sp
 from optuna import Trial
-from typing import List, Tuple, Union, Iterable
+from typing import List, Union, Iterable
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, average_precision_score, recall_score, precision_score, f1_score, roc_auc_score, roc_curve, precision_recall_curve, auc, confusion_matrix
@@ -15,47 +15,9 @@ from ._classifier import _instantiate_estimator
 
 class ClassTask:
     """
-        Class for optimizing machine learning pipelines using Bayesian optimization.
-
-        Attributes:
-            _study (optuna.study.Study): Optuna study object containing the optimization results.
-            _best_pipeline (sklearn.pipeline.Pipeline): Best machine learning pipeline obtained from optimization.
-            _best_score (float): Best score achieved during optimization.
-
-        Methods:
-            optimize(X, y, metric='accuracy', select=False, study_name='optimization', cv=5, n_trials=100):
-                Optimize the machine learning pipeline using Bayesian optimization.
-
-            predict(X):
-                Predict probabilities given features using the best pipeline.
-
-            evaluate(X, y_true, threshold=0.5):
-                Evaluate the performance of the best pipeline on the test set using various metrics.
-
-            plot_roc_curve(X, y_true):
-                Plot the Receiver Operating Characteristic (ROC) curve.
-
-            plot_pr_curve(X, y_true):
-                Plot the Precision-Recall curve.
-
-            plot_confusion_matrix(X, y_true, threshold=0.5):
-                Plot the confusion matrix.
-
-            plot_optimization_history():
-                Plot the optimization history showing the performance of trials over iterations.
-
-            plot_param_importances():
-                Plot the parameter importances obtained during optimization.
-
-            plot_feature_importances(X):
-                Plot the feature importances using SHAP values for the best pipeline.
-
-            best_pipeline():
-                Get the best machine learning pipeline obtained from optimization.
-
-            best_score():
-                Get the best CV score achieved during optimization.
-        """
+        A `ClassTask` object manages the optimization process given classification tasks and provides methods
+        to evaluate performance of the optimal machine learning pipeline on unforeseen data.
+    """
 
     def __init__(self):
         self._study = None
@@ -65,16 +27,18 @@ class ClassTask:
     def optimize(self, X: pd.DataFrame, y: np.ndarray, metric: str='accuracy', select: bool=False,
      study_name: str='optimization', cv: Union[int, Iterable]=5, n_trials: int=100) -> None:
         """
-        Optimize the machine learning pipeline using Optuna Bayesian optimization.
+        Optimize the machine learning pipeline by tuning its components and estimator hyperparameters through, 
+        by default, 100 trials based on the specified evaluation metric using Bayesian optimization with the 
+        Optuna library. Use 5-fold cross validation by default.
 
         Parameters:
-            X (pd.DataFrame): Input features.
-            y (np.ndarray): Target variable.
-            metric (str): Metric to optimize (default is 'accuracy').
-            select (bool): Whether to include feature selection in the pipeline (default is False).
-            study_name (str): Name of the optimization study (default is 'optimization').
-            cv (Union[int, Iterable]): Cross-validation strategy, can be an integer or a CV splitter (default is 5).
-            n_trials (int): Number of optimization trials (default is 100).
+            X (pd.DataFrame): Training features.
+            y (np.ndarray): Training labels.
+            metric (str): Classification metric.
+            select (bool): Whether to perform feature selection prior to fitting models. Set `True` to save computing resources.
+            study_name (str): Name of the optimization study.
+            cv (Union[int, Iterable]): Cross-validation strategy.
+            n_trials (int): Number of optimization trials.
         """
         numerical_features = [
             *X.select_dtypes(exclude=['object', 'category']).columns
@@ -109,28 +73,29 @@ class ClassTask:
 
     def predict(self, X: pd.DataFrame) -> np.ndarray:
         """
-        Predict probabilities given features using the best pipeline.
+        Probability estimates of the new data using the optimal pipeline.
 
         Parameters:
-            X (pd.DataFrame): Input features.
+            X (pd.DataFrame): Test features.
 
         Returns:
-            np.ndarray: Predicted probabilities.
+            np.ndarray: Probability estimates.
         """
         pred_prob = self._best_pipeline.predict_proba(X)[:, 1]
         return pred_prob
 
     def evaluate(self, X: pd.DataFrame, y_true: np.array, threshold: float=0.5) -> pd.DataFrame:
         """
-        Evaluate the performance of the best pipeline on the test set using various metrics.
+        Evaluate performance of the optimal pipeline on the test data using threshold-based and ranking-based metrics.
+        The classification threshold is set to be 0.5 by default.
 
         Parameters:
-            X (pd.DataFrame): Input features.
-            y_true (np.array): True labels.
-            threshold (float): Threshold for binary classification (default is 0.5).
+            X (pd.DataFrame): Test features.
+            y_true (np.array): Test labels.
+            threshold (float): Binary classification threshold.
 
         Returns:
-            pd.DataFrame: DataFrame containing evaluation metrics.
+            pd.DataFrame: A pd.DataFrame object containing evaluation results.
         """
         pred_prob = self.predict(X)
         scores = {
@@ -148,8 +113,8 @@ class ClassTask:
         Plot the Receiver Operating Characteristic (ROC) curve.
 
         Parameters:
-            X (pd.DataFrame): Input features.
-            y_true (np.array): True labels.
+            X (pd.DataFrame): Features.
+            y_true (np.array): Labels.
         """
         pred_prob = self.predict(X)
         fpr, tpr, _ = roc_curve(y_true, pred_prob)
@@ -168,8 +133,8 @@ class ClassTask:
         Plot the Precision-Recall curve.
 
         Parameters:
-            X (pd.DataFrame): Input features.
-            y_true (np.array): True labels.
+            X (pd.DataFrame): Features.
+            y_true (np.array): Labels.
         """
         pred_prob = self.predict(X)
         precision, recall, _ = precision_recall_curve(y_true, pred_prob)
@@ -187,9 +152,9 @@ class ClassTask:
         Plot the confusion matrix.
 
         Parameters:
-            X (pd.DataFrame): Input features.
-            y_true (np.array): True labels.
-            threshold (float): Threshold for binary classification (default is 0.5).
+            X (pd.DataFrame): Features.
+            y_true (np.array): Labels.
+            threshold (float): Binary classification threshold.
         """
         pred_prob = self.predict(X)
         y_pred = pred_prob >= threshold
@@ -210,17 +175,17 @@ class ClassTask:
 
     def plot_param_importances(self) -> None:
         """
-        Plot the parameter importances obtained during optimization.
+        Plot the parameter importances during optimization.
         """
         fig = op.visualization.plot_param_importances(self._study)
         fig.show()
 
     def plot_feature_importances(self, X: pd.DataFrame) -> None:
         """
-        Plot the feature importances using SHAP values.
+        Plot the feature importances based on SHAP values.
 
         Parameters:
-            X (pd.DataFrame): Input features.
+            X (pd.DataFrame): Features.
         """
         explainer = sp.Explainer(self._best_pipeline[-1])
         X_transformed = self._best_pipeline[0].transform(X)
@@ -231,10 +196,10 @@ class ClassTask:
     @property
     def best_pipeline(self) -> Pipeline:
         """
-        Get the best machine learning pipeline obtained from optimization.
+        Get the optimal machine learning pipeline obtained from optimization.
 
         Returns:
-            Pipeline: Best machine learning pipeline.
+            Pipeline: The optimal machine learning pipeline.
         """
         return self._best_pipeline
 
@@ -244,6 +209,6 @@ class ClassTask:
         Get the best CV score achieved during optimization.
 
         Returns:
-            float: Best score.
+            float: The best CV score.
         """
         return self._best_score

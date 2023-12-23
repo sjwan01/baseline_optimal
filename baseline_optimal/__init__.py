@@ -1,1 +1,1 @@
-from .classifier_pipeline import ClassTask
+from .class_task import ClassTask
