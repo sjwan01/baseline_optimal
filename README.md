@@ -72,7 +72,7 @@ You may access the sketchy documentation [here](https://sjwan01.github.io/baseli
 
 ---
 
-## Future Updates
+## TODO
 
 The upcoming version of the `baseline_optimal` package will support:
 
