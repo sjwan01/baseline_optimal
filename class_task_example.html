@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Churn Prediction with Telecommunication Data &mdash; Baseline Optimal 0.0.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=bbaf98b3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="baseline_optimal.class_task" href="class_task.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Baseline Optimal
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="class_task.html">baseline_optimal.class_task</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Churn Prediction with Telecommunication Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#0.-Dependencies">0. Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Problem-Statement">1. Problem Statement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Data-Collection">2. Data Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Exploratory-Data-Analysis">3. Exploratory Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Data-Preparation">4. Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Optimization-and-Results">5. Optimization and Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Conclusion">6. Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Baseline Optimal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Churn Prediction with Telecommunication Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/class_task_example.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Churn-Prediction-with-Telecommunication-Data">
+<h1>Churn Prediction with Telecommunication Data<a class="headerlink" href="#Churn-Prediction-with-Telecommunication-Data" title="Link to this heading"></a></h1>
+<p>This project serves as an example of the <code class="docutils literal notranslate"><span class="pre">baseline_optimal.class_task</span></code> module application.</p>
+<section id="0.-Dependencies">
+<h2>0. Dependencies<a class="headerlink" href="#0.-Dependencies" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from baseline_optimal import ClassTask
+
+%matplotlib inline
+import warnings
+warnings.filterwarnings(&#39;ignore&#39;)
+</pre></div>
+</div>
+</div>
+<p>Neat and clean import.</p>
+</section>
+<section id="1.-Problem-Statement">
+<h2>1. Problem Statement<a class="headerlink" href="#1.-Problem-Statement" title="Link to this heading"></a></h2>
+<p>The dataset used for this project is synthetic from a telecommunications mobile phone carrier which can be found through this <a class="reference external" href="https://aws.amazon.com/blogs/machine-learning/predicting-customer-churn-with-no-code-machine-learning-using-amazon-sagemaker-canvas/">AWS Machine Learning Blog</a>.</p>
+<p>In the blog, the synthetic dataset is used as an example to showcase the power of <a class="reference external" href="https://aws.amazon.com/sagemaker/canvas/?sagemaker-data-wrangler-whats-new.sort-by=item.additionalFields.postDateTime&amp;sagemaker-data-wrangler-whats-new.sort-order=desc">Amazon SageMaker Canvas</a>, which provides a simple interface that allows users to build a customer churn machine learning model without any programming.</p>
+<p>The blog states that the model could score a 97.9% accuracy on this synthetic dataset at its best. Through this project, we want to explore:</p>
+<ul class="simple">
+<li><p>Can we obtain a machine learning pipeline that achieves a higher score?</p></li>
+<li><p>Which features are the most influencial in determining whether a customer will churn?</p></li>
+</ul>
+</section>
+<section id="2.-Data-Collection">
+<h2>2. Data Collection<a class="headerlink" href="#2.-Data-Collection" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Data source: <a class="reference external" href="https://aws.amazon.com/blogs/machine-learning/predicting-customer-churn-with-no-code-machine-learning-using-amazon-sagemaker-canvas/">AWS Machine Learning Blog</a></p></li>
+<li><p>The synthetic dataset contains 5000 observations with 21 variables.</p></li>
+</ul>
+<p>Load the data:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = pd.read_csv(&quot;../data/churn.csv&quot;)
+</pre></div>
+</div>
+</div>
+<p>Display the first 5 observations:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.head()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>State</th>
+      <th>Account Length</th>
+      <th>Area Code</th>
+      <th>Phone</th>
+      <th>Int'l Plan</th>
+      <th>VMail Plan</th>
+      <th>VMail Message</th>
+      <th>Day Mins</th>
+      <th>Day Calls</th>
+      <th>Day Charge</th>
+      <th>...</th>
+      <th>Eve Calls</th>
+      <th>Eve Charge</th>
+      <th>Night Mins</th>
+      <th>Night Calls</th>
+      <th>Night Charge</th>
+      <th>Intl Mins</th>
+      <th>Intl Calls</th>
+      <th>Intl Charge</th>
+      <th>CustServ Calls</th>
+      <th>Churn?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PA</td>
+      <td>163</td>
+      <td>806</td>
+      <td>403-2562</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>300</td>
+      <td>8.162204</td>
+      <td>3</td>
+      <td>7.579174</td>
+      <td>...</td>
+      <td>4</td>
+      <td>6.508639</td>
+      <td>4.065759</td>
+      <td>100</td>
+      <td>5.111624</td>
+      <td>4.928160</td>
+      <td>6</td>
+      <td>5.673203</td>
+      <td>3</td>
+      <td>True.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SC</td>
+      <td>15</td>
+      <td>836</td>
+      <td>158-8416</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>0</td>
+      <td>10.018993</td>
+      <td>4</td>
+      <td>4.226289</td>
+      <td>...</td>
+      <td>0</td>
+      <td>9.972592</td>
+      <td>7.141040</td>
+      <td>200</td>
+      <td>6.436188</td>
+      <td>3.221748</td>
+      <td>6</td>
+      <td>2.559749</td>
+      <td>8</td>
+      <td>False.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MO</td>
+      <td>131</td>
+      <td>777</td>
+      <td>896-6253</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>300</td>
+      <td>4.708490</td>
+      <td>3</td>
+      <td>4.768160</td>
+      <td>...</td>
+      <td>3</td>
+      <td>4.566715</td>
+      <td>5.363235</td>
+      <td>100</td>
+      <td>5.142451</td>
+      <td>7.139023</td>
+      <td>2</td>
+      <td>6.254157</td>
+      <td>4</td>
+      <td>False.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>WY</td>
+      <td>75</td>
+      <td>878</td>
+      <td>817-5729</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>700</td>
+      <td>1.268734</td>
+      <td>3</td>
+      <td>2.567642</td>
+      <td>...</td>
+      <td>5</td>
+      <td>2.333624</td>
+      <td>3.773586</td>
+      <td>450</td>
+      <td>3.814413</td>
+      <td>2.245779</td>
+      <td>6</td>
+      <td>1.080692</td>
+      <td>6</td>
+      <td>False.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WY</td>
+      <td>146</td>
+      <td>878</td>
+      <td>450-4942</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>0</td>
+      <td>2.696177</td>
+      <td>3</td>
+      <td>5.908916</td>
+      <td>...</td>
+      <td>3</td>
+      <td>3.670408</td>
+      <td>3.751673</td>
+      <td>250</td>
+      <td>2.796812</td>
+      <td>6.905545</td>
+      <td>4</td>
+      <td>7.134343</td>
+      <td>6</td>
+      <td>True.</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div>
+</div>
+<p>Definitions of independent and dependent variables:</p>
+<p><strong>Features:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">State</span></code> - The US state in which the customer resides, indicated by a two-letter abbreviation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Account</span> <span class="pre">Length</span></code> – The number of days that this account has been active</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Area</span> <span class="pre">Code</span></code> – The three-digit area code of the customer’s phone number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Phone</span></code> – The remaining seven-digit phone number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Int’l</span> <span class="pre">Plan</span></code> – Whether the customer has an international calling plan (yes/no)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VMail</span> <span class="pre">Plan</span></code> – Whether the customer has a voice mail feature (yes/no)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VMail</span> <span class="pre">Message</span></code> – The average number of voice mail messages per month</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Day</span> <span class="pre">Mins</span></code> – The total number of calling minutes used during the day</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Day</span> <span class="pre">Calls</span></code> – The total number of calls placed during the day</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Day</span> <span class="pre">Charge</span></code> – The billed cost of daytime calls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Eve</span> <span class="pre">Mins,</span> <span class="pre">Eve</span> <span class="pre">Calls,</span> <span class="pre">Eve</span> <span class="pre">Charge</span></code> – The billed cost for evening calls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Night</span> <span class="pre">Mins,</span> <span class="pre">Night</span> <span class="pre">Calls,</span> <span class="pre">Night</span> <span class="pre">Charge</span></code> – The billed cost for nighttime calls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Intl</span> <span class="pre">Mins,</span> <span class="pre">Intl</span> <span class="pre">Calls,</span> <span class="pre">Intl</span> <span class="pre">Charge</span></code> – The billed cost for international calls</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CustServ</span> <span class="pre">Calls</span></code> – The number of calls placed to customer service</p></li>
+</ul>
+<p><strong>Target:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Churn?</span></code> – Whether the customer left the service (true/false)</p></li>
+</ul>
+</section>
+<section id="3.-Exploratory-Data-Analysis">
+<h2>3. Exploratory Data Analysis<a class="headerlink" href="#3.-Exploratory-Data-Analysis" title="Link to this heading"></a></h2>
+<p>You know how to do this - we’ll just check the target class distribution:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>labels = [&#39;Not Churned&#39;, &#39;Churned&#39;]
+sizes = df[&#39;Churn?&#39;].value_counts()
+explode = [0, 0.1]
+
+fig, ax = plt.subplots()
+ax.pie(sizes, explode=explode, labels=labels, autopct=&#39;%1.1f%%&#39;,
+       shadow=True, startangle=90)
+plt.title(label=&#39;Target Class Distribution&#39;)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_18_0.png" src="_images/class_task_example_18_0.png" />
+</div>
+</div>
+<p>The target class is perfectly balanced.</p>
+</section>
+<section id="4.-Data-Preparation">
+<h2>4. Data Preparation<a class="headerlink" href="#4.-Data-Preparation" title="Link to this heading"></a></h2>
+<p>We remove <code class="docutils literal notranslate"><span class="pre">Area</span> <span class="pre">Code</span></code>, <code class="docutils literal notranslate"><span class="pre">Phone</span></code>, and <code class="docutils literal notranslate"><span class="pre">State</span></code> from the data.</p>
+<p>The we separate the features and the target:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>drop = [&#39;Area Code&#39;, &#39;Phone&#39;, &#39;State&#39;, &#39;Churn?&#39;]
+X = df.drop(drop, axis=1)
+y = df[&#39;Churn?&#39;]
+</pre></div>
+</div>
+</div>
+<p>Split the training and the test data given ratio 4:1:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
+</pre></div>
+</div>
+</div>
+<p>Encode the target data as some classifier implementations don’t support categorical data:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t_e = LabelEncoder()
+y_train = t_e.fit_transform(y_train)
+y_test = t_e.transform(y_test)
+</pre></div>
+</div>
+</div>
+<p>Minimum efforts on preprocessing the data.</p>
+</section>
+<section id="5.-Optimization-and-Results">
+<h2>5. Optimization and Results<a class="headerlink" href="#5.-Optimization-and-Results" title="Link to this heading"></a></h2>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">ClassTask</span></code> object:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task = ClassTask()
+</pre></div>
+</div>
+</div>
+<p>Search for the optimal pipeline:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.optimize(X_train, y_train)
+</pre></div>
+</div>
+</div>
+<p>The evaluation metric is set as <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> by default. The best cross validation score is 0.95 on the training data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.best_score
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.94875
+</pre></div></div>
+</div>
+<p>Get probability estimates using the test data:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pred_prob = task.predict(X_test)
+</pre></div>
+</div>
+</div>
+<p>Get performance scores on the test data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>scores = task.evaluate(X_test, y_test)
+scores
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AUC-ROC</th>
+      <th>Accuracy</th>
+      <th>Average Precision</th>
+      <th>Recall</th>
+      <th>Precision</th>
+      <th>F1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.992</td>
+      <td>0.961</td>
+      <td>0.991</td>
+      <td>0.977</td>
+      <td>0.943</td>
+      <td>0.96</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The optimal pipeline has promising performances across all measures.</p>
+<p>Obtain the best <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> object:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>best_pipeline = task.best_pipeline
+</pre></div>
+</div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> API to get the processing pipeline as well as the estimator:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>best_processor = best_pipeline.named_steps[&#39;processor&#39;]
+best_estimator = best_pipeline.named_steps[&#39;estimator&#39;]
+</pre></div>
+</div>
+</div>
+<p>See how the training data is processed and transformed in the optimal pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>best_processor
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>ColumnTransformer(transformers=[(&#x27;numerical_pipeline&#x27;,
+                                 Pipeline(steps=[(&#x27;numerical_imputer&#x27;,
+                                                  SimpleImputer(fill_value=-1)),
+                                                 (&#x27;scaler&#x27;, MinMaxScaler())]),
+                                 [&#x27;Account Length&#x27;, &#x27;VMail Message&#x27;, &#x27;Day Mins&#x27;,
+                                  &#x27;Day Calls&#x27;, &#x27;Day Charge&#x27;, &#x27;Eve Mins&#x27;,
+                                  &#x27;Eve Calls&#x27;, &#x27;Eve Charge&#x27;, &#x27;Night Mins&#x27;,
+                                  &#x27;Night Calls&#x27;, &#x27;Night Charge&#x27;, &#x27;Intl Mins&#x27;,
+                                  &#x27;Intl Calls&#x27;, &#x27;Intl Charge&#x27;,
+                                  &#x27;CustServ Calls&#x27;]),
+                                (&#x27;categorical_pipeline&#x27;,
+                                 Pipeline(steps=[(&#x27;categorical_imputer&#x27;,
+                                                  SimpleImputer(fill_value=&#x27;missing&#x27;,
+                                                                strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encoder&#x27;,
+                                                  OneHotEncoder(drop=&#x27;first&#x27;))]),
+                                 [&quot;Int&#x27;l Plan&quot;, &#x27;VMail Plan&#x27;])])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">ColumnTransformer</label><div class="sk-toggleable__content"><pre>ColumnTransformer(transformers=[(&#x27;numerical_pipeline&#x27;,
+                                 Pipeline(steps=[(&#x27;numerical_imputer&#x27;,
+                                                  SimpleImputer(fill_value=-1)),
+                                                 (&#x27;scaler&#x27;, MinMaxScaler())]),
+                                 [&#x27;Account Length&#x27;, &#x27;VMail Message&#x27;, &#x27;Day Mins&#x27;,
+                                  &#x27;Day Calls&#x27;, &#x27;Day Charge&#x27;, &#x27;Eve Mins&#x27;,
+                                  &#x27;Eve Calls&#x27;, &#x27;Eve Charge&#x27;, &#x27;Night Mins&#x27;,
+                                  &#x27;Night Calls&#x27;, &#x27;Night Charge&#x27;, &#x27;Intl Mins&#x27;,
+                                  &#x27;Intl Calls&#x27;, &#x27;Intl Charge&#x27;,
+                                  &#x27;CustServ Calls&#x27;]),
+                                (&#x27;categorical_pipeline&#x27;,
+                                 Pipeline(steps=[(&#x27;categorical_imputer&#x27;,
+                                                  SimpleImputer(fill_value=&#x27;missing&#x27;,
+                                                                strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;encoder&#x27;,
+                                                  OneHotEncoder(drop=&#x27;first&#x27;))]),
+                                 [&quot;Int&#x27;l Plan&quot;, &#x27;VMail Plan&#x27;])])</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">numerical_pipeline</label><div class="sk-toggleable__content"><pre>[&#x27;Account Length&#x27;, &#x27;VMail Message&#x27;, &#x27;Day Mins&#x27;, &#x27;Day Calls&#x27;, &#x27;Day Charge&#x27;, &#x27;Eve Mins&#x27;, &#x27;Eve Calls&#x27;, &#x27;Eve Charge&#x27;, &#x27;Night Mins&#x27;, &#x27;Night Calls&#x27;, &#x27;Night Charge&#x27;, &#x27;Intl Mins&#x27;, &#x27;Intl Calls&#x27;, &#x27;Intl Charge&#x27;, &#x27;CustServ Calls&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value=-1)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label sk-toggleable__label-arrow">MinMaxScaler</label><div class="sk-toggleable__content"><pre>MinMaxScaler()</pre></div></div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label sk-toggleable__label-arrow">categorical_pipeline</label><div class="sk-toggleable__content"><pre>[&quot;Int&#x27;l Plan&quot;, &#x27;VMail Plan&#x27;]</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label sk-toggleable__label-arrow">SimpleImputer</label><div class="sk-toggleable__content"><pre>SimpleImputer(fill_value=&#x27;missing&#x27;, strategy=&#x27;most_frequent&#x27;)</pre></div></div></div><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label sk-toggleable__label-arrow">OneHotEncoder</label><div class="sk-toggleable__content"><pre>OneHotEncoder(drop=&#x27;first&#x27;)</pre></div></div></div></div></div></div></div></div></div></div></div></div></div>
+</div>
+<p>The optimal estimator is a <code class="docutils literal notranslate"><span class="pre">XGBClassifier</span></code> object:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>best_estimator
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=None, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.08044551460612077,
+              max_bin=None, max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=10, max_leaves=None,
+              min_child_weight=None, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=249, n_jobs=None,
+              num_parallel_tree=None, random_state=123, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" checked><label for="sk-estimator-id-8" class="sk-toggleable__label sk-toggleable__label-arrow">XGBClassifier</label><div class="sk-toggleable__content"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=None, feature_types=None,
+              gamma=None, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.08044551460612077,
+              max_bin=None, max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=10, max_leaves=None,
+              min_child_weight=None, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=249, n_jobs=None,
+              num_parallel_tree=None, random_state=123, ...)</pre></div></div></div></div></div></div>
+</div>
+<p>Plot the ROC curve:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.plot_roc_curve(X_test, y_test)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_49_0.png" src="_images/class_task_example_49_0.png" />
+</div>
+</div>
+<p>Plot the PR curve:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.plot_pr_curve(X_test, y_test)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_51_0.png" src="_images/class_task_example_51_0.png" />
+</div>
+</div>
+<p>Plot the confusion matrix:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.plot_confusion_matrix(X_test, y_test)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_53_0.png" src="_images/class_task_example_53_0.png" />
+</div>
+</div>
+<p>We barely see misclassified instances.</p>
+<p>Note that because we didn’t set <code class="docutils literal notranslate"><span class="pre">select=True</span></code> in the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> function, all features are considered. Plot feature importances based on Shapley values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.plot_feature_importances(X_test)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_56_0.png" src="_images/class_task_example_56_0.png" />
+</div>
+</div>
+<p>The SHAP values are telling us that on average, <code class="docutils literal notranslate"><span class="pre">Night</span> <span class="pre">Calls</span></code>, <code class="docutils literal notranslate"><span class="pre">Eve</span> <span class="pre">Mins</span></code>, and <code class="docutils literal notranslate"><span class="pre">Night</span> <span class="pre">Charge</span></code> are the most important features contributing to the predictions.</p>
+<p>Meanwhile, <code class="docutils literal notranslate"><span class="pre">Int'l</span> <span class="pre">Plan_yes</span></code> is weighted the least.</p>
+<p>Next, visualize the directionality impact of the features:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>task.plot_feature_directionality(X_test)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/class_task_example_59_0.png" src="_images/class_task_example_59_0.png" />
+</div>
+</div>
+<p>Some quick insights:</p>
+<ol class="arabic simple">
+<li><p>The more clients call at night, the less likely they will churn.</p></li>
+<li><p>The longer clients call in evening, the less likely they will churn.</p></li>
+<li><p>The higher the billed cost is for nighttime calls, the less likely clients will churn.</p></li>
+<li><p>Can barely tell how values of <code class="docutils literal notranslate"><span class="pre">Int'l</span> <span class="pre">Plan_yes</span></code> are associated with churn behaviors.</p></li>
+</ol>
+</section>
+<section id="6.-Conclusion">
+<h2>6. Conclusion<a class="headerlink" href="#6.-Conclusion" title="Link to this heading"></a></h2>
+<p>Some quick results:</p>
+<ol class="arabic simple">
+<li><p>Although we didn’t achieve a better score, 96.1% accuracy comparing to 97.9%, we achieve it fast and we are happy to accept it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Night</span> <span class="pre">Calls</span></code>, <code class="docutils literal notranslate"><span class="pre">Eve</span> <span class="pre">Mins</span></code>, and <code class="docutils literal notranslate"><span class="pre">Night</span> <span class="pre">Charge</span></code> are the most influencial in determining whether a customer will churn, and we studied how their values will affect the churn behaviors.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="class_task.html" class="btn btn-neutral float-left" title="baseline_optimal.class_task" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Shunji Wan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
