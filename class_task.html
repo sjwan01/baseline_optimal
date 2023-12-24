@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>baseline_optimal.class_task &mdash; Baseline Optimal 0.0.5 documentation</title>
+  <title>baseline_optimal.class_task &mdash; Baseline Optimal 0.0.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=282f96c0"></script>
+        <script src="_static/documentation_options.js?v=1fd71caa"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -54,6 +54,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.evaluate"><code class="docutils literal notranslate"><span class="pre">ClassTask.evaluate()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.optimize"><code class="docutils literal notranslate"><span class="pre">ClassTask.optimize()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_confusion_matrix"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_confusion_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_feature_directionality"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_feature_directionality()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_feature_importances"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_feature_importances()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_optimization_history"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_optimization_history()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline_optimal.class_task.ClassTask.plot_param_importances"><code class="docutils literal notranslate"><span class="pre">ClassTask.plot_param_importances()</span></code></a></li>
@@ -120,13 +121,13 @@
 </pre></div>
 </div>
 <p>After fitting the data, one option is to use the <code class="docutils literal notranslate"><span class="pre">ClassTask</span></code> object for probability estimates and evaluation on the test set. You may customize the classification threshold.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_prob</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pred_prob</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="n">scores</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Or, you may obtain the optimal <code class="docutils literal notranslate"><span class="pre">imblearn.pipeline.Pipeline</span></code> object. Check <a class="reference external" href="https://imbalanced-learn.org/stable/references/generated/imblearn.pipeline.Pipeline.html">here</a>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_pipeline</span> <span class="o">=</span> <span class="n">study</span><span class="o">.</span><span class="n">best_pipeline</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_pipeline</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">best_pipeline</span>
 
 <span class="n">pred_prob</span> <span class="o">=</span> <span class="n">best_pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
@@ -226,6 +227,17 @@ Optuna library. Use 5-fold cross validation by default.</p>
 <li><p><strong>y_true</strong> (<em>np.array</em>) – Labels.</p></li>
 <li><p><strong>threshold</strong> (<em>float</em>) – Binary classification threshold.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baseline_optimal.class_task.ClassTask.plot_feature_directionality">
+<span class="sig-name descname"><span class="pre">plot_feature_directionality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/baseline_optimal/class_task.html#ClassTask.plot_feature_directionality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#baseline_optimal.class_task.ClassTask.plot_feature_directionality" title="Link to this definition"></a></dt>
+<dd><p>Plot how features influence the predictions based on SHAP values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>pd.DataFrame</em>) – Features.</p>
 </dd>
 </dl>
 </dd></dl>
