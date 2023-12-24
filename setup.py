@@ -25,5 +25,5 @@ setup(
     packages = find_packages(),
     install_requires = get_requirements('requirements.txt'),
     include_package_data=True,
-    exclude_package_data={'': ['venv', 'docs', 'build', 'dist', '.github', '*.egg-info', '.gitignore', 'examples', 'data']},
+    exclude_package_data={'': ['venv', 'docs', 'build', 'dist', '.github', '*.egg-info', '.gitignore', 'notebooks', 'data']},
 )

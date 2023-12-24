@@ -12,5 +12,4 @@ docs/*.pdf
 .gitignore/
 # .github/
 data/
-examples/
 !pyproject.toml
