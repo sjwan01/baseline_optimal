@@ -35,7 +35,7 @@ Check out `baseline_optimal` modules available and their respective documentatio
 
 | Modules | Task | Documentation | Example |
 | - | - |-- | - |
-| `baseline_optimal.class_task` | classification | [**Link**](https://sjwan01.github.io/baseline_optimal/class_task.html) | [**Link**]() |
+| `baseline_optimal.class_task` | classification | [**Link**](https://sjwan01.github.io/baseline_optimal/class_task.html) | [**Link**](https://sjwan01.github.io/baseline_optimal/class_task_example.html) |
 
 </div>
 

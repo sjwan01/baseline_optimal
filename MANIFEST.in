@@ -5,6 +5,5 @@ recursive-exclude build *
 recursive-exclude dist *
 recursive-exclude *.egg-info *
 recursive-exclude .gitignore *
-recursive-exclude notebooks *
 recursive-exclude data *
 include requirements.txt
