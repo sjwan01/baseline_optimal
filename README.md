@@ -10,15 +10,6 @@ Given these problems, the `baseline_optimal` package automates the workflow by e
 
 ---
 
-## Why "Baseline" Optimal
-
-The current version supports feature selection, missing value imputation, scaling and encoding as data transformation and processing steps. The pipeline performance is evaluated based on choices of these components along with multiple machine learning algorithms. With help of Optuna, the package gives you the optimal workflow provided the raw data.
-
-The results are "baseline" optimal because the workflow attempts only the most basic methods. No feature engineering or dimensionality reduction, so on and so forth. It aims to answer the lazy question that, "If I do nothing, how far can I get?" By using this package, if you get satisfting results then congradulations! If not, then you know where the baseline is and you might want to do better than that based on your domain knowledge.
-
-🤞 Good luck. 🤞
-___
-
 ## Installation
 
 You can install the `baseline_optimal` package and its dependencies using `pip`:
@@ -34,6 +25,15 @@ import baseline_optimal
 ```
 
 ---
+
+## Why "Baseline" Optimal
+
+The current version supports feature selection, missing value imputation, scaling and encoding as data transformation and processing steps. The pipeline performance is evaluated based on choices of these components along with multiple machine learning algorithms. With help of Optuna, the package gives you the optimal workflow provided the raw data.
+
+The results are "baseline" optimal because the workflow attempts only the most basic methods. No feature engineering or dimensionality reduction, so on and so forth. It aims to answer the lazy question that, "If I do nothing, how far can I get?" By using this package, if you get satisfting results then congradulations! If not, then you know where the baseline is and you might want to do better than that based on your domain knowledge.
+
+🤞 Good luck. 🤞
+___
 
 ## Documentation
 
@@ -55,10 +55,10 @@ Check out machine learning algorithms supported and hyperparameters considered.
 
 | Algorithm | Source | Hyperparameters |
 | - | - | - |
-| `DecisionTreeClassifier` | `sklearn.tree` | `max_features`<br>`max_depth`<br>`min_samples_split` |
-| `RandomForestClassifier` | `sklearn.ensemble` | `n_estimators`<br>`max_features`<br>`max_depth`<br>`min_samples_split` |
-| `AdaBoostClassifier` | `sklearn.ensemble` | `n_estimators`<br>`learning_rate` |
-| `XGBClassifier` | `xgboost` | `n_estimators`<br>`learning_rate`<br>`max_depth` |
+| [`DecisionTreeClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html) | `sklearn.tree` | `max_features`<br>`max_depth`<br>`min_samples_split` |
+| [`RandomForestClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html) | `sklearn.ensemble` | `n_estimators`<br>`max_features`<br>`max_depth`<br>`min_samples_split` |
+| [`AdaBoostClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) | `sklearn.ensemble` | `n_estimators`<br>`learning_rate` |
+| [`XGBClassifier`](https://xgboost.readthedocs.io/en/stable/python/python_api.html) | `xgboost` | `n_estimators`<br>`learning_rate`<br>`max_depth` |
 
 </div>
 
