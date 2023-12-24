@@ -7,3 +7,4 @@ recursive-exclude *.egg-info *
 recursive-exclude .gitignore *
 recursive-exclude examples *
 recursive-exclude data *
+include requirements.txt
