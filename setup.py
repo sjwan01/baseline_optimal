@@ -23,5 +23,7 @@ setup(
     author_email = 'sw3843@columbia.edu',
     url='https://github.com/sjwan01/baseline_optimal',
     packages = find_packages(),
-    install_requires = get_requirements('requirements.txt')
+    install_requires = get_requirements('requirements.txt'),
+    include_package_data=True,
+    exclude_package_data={'': ['venv', 'docs', 'build', 'dist', '.github', '*.egg-info', '.gitignore']},
 )

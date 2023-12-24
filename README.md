@@ -1,9 +1,22 @@
 # Introduction to Baseline Optimal
 
-In machine learning projects, achieving optimal evaluation metric scores involves navigating through multiple steps, including data cleaning, processing, model selection, and hyperparameter tuning. This iterative process often produces repetitive and error-prone code, resulting in suboptimal outcomes.
+Between the raw data and the optimal results in machine learning projects, there is an exhausting, iterative process. We go back and forth to experiment with various combinations of feature engineering, processing methods, and models along with their hyperparameters. At the end of the day, we hope our efforts pay off.
 
-The `baseline_optimal` package automates the process of pipeline tuning by employing [Optuna](https://optuna.readthedocs.io/en/stable/index.html)'s Bayesian optimization, significantly reducing the need for manual experimentation. With the help of Optuna, the package selects and optimizes pipeline components through iterative trials, leading to the discovery of the most effective combination of data preprocessing, model selection, and hyperparameter configurations.
+🤞 God bless data scientists. 🤞
 
+Manual experimentation is a good practice. However, you may have found that we often produce messy, repetitive code throughout the process, and it takes a long while for us to figure out that an attempt doesn't work out. Sometimes we may overcomplicate data transformation and processing to get promising but unncessary metric scores.
+
+Given these problems, the `baseline_optimal` package automates the workflow by employing [Optuna](https://optuna.readthedocs.io/en/stable/index.html)'s Bayesian optimization, significantly reducing the need for manual experimentation. You provide the raw data, and the modules do the heavy lifting. 
+
+---
+
+## Why "Baseline" Optimal
+
+The current version supports feature selection, missing value imputation, scaling and encoding as data transformation and processing steps. The pipeline performance is evaluated based on choices of these components along with multiple machine learning algorithms. With help of Optuna, the package gives you the optimal workflow provided the raw data.
+
+The results are "baseline" optimal because the workflow attempts only the most basic methods. No feature engineering or dimensionality reduction, so on and so forth. It aims to answer the lazy question that, "If I do nothing, how far can I get?" By using this package, if you get satisfting results then congradulations! If not, then you know where the baseline is and you might want to do better than that based on your domain knowledge.
+
+🤞 Good luck. 🤞
 ___
 
 ## Installation
