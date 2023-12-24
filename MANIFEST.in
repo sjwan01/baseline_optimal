@@ -5,3 +5,5 @@ recursive-exclude build *
 recursive-exclude dist *
 recursive-exclude *.egg-info *
 recursive-exclude .gitignore *
+recursive-exclude examples *
+recursive-exclude data *

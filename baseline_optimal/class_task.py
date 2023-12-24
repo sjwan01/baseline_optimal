@@ -191,6 +191,19 @@ class ClassTask:
         X_transformed = self._best_pipeline[0].transform(X)
         feature_names = [feature.split('__')[1] for feature in self._best_pipeline[0].get_feature_names_out()]
         shap_values = explainer.shap_values(X_transformed)
+        sp.summary_plot(shap_values, X_transformed, feature_names, plot_type='bar')
+
+    def plot_feature_directionality(self, X: pd.DataFrame) -> None:
+        """
+        Plot how features influence the predictions based on SHAP values.
+
+        Parameters:
+            X (pd.DataFrame): Features.
+        """
+        explainer = sp.Explainer(self._best_pipeline[-1])
+        X_transformed = self._best_pipeline[0].transform(X)
+        feature_names = [feature.split('__')[1] for feature in self._best_pipeline[0].get_feature_names_out()]
+        shap_values = explainer.shap_values(X_transformed)
         sp.summary_plot(shap_values, X_transformed, feature_names)
     
     @property

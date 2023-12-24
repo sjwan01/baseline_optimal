@@ -15,7 +15,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name = 'baseline_optimal',
-    version = '0.0.5',
+    version = '0.0.6',
     license='MIT',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -25,5 +25,5 @@ setup(
     packages = find_packages(),
     install_requires = get_requirements('requirements.txt'),
     include_package_data=True,
-    exclude_package_data={'': ['venv', 'docs', 'build', 'dist', '.github', '*.egg-info', '.gitignore']},
+    exclude_package_data={'': ['venv', 'docs', 'build', 'dist', '.github', '*.egg-info', '.gitignore', 'examples', 'data']},
 )

@@ -23,16 +23,6 @@ After installation, you can import the package in Python:
 ```python
 import baseline_optimal
 ```
-
----
-
-## Why "Baseline" Optimal
-
-The current version supports feature selection, missing value imputation, scaling and encoding as data transformation and processing steps. The pipeline performance is evaluated based on choices of these components along with multiple machine learning algorithms. With help of Optuna, the package gives you the optimal workflow provided the raw data.
-
-The results are "baseline" optimal because the workflow attempts only the most basic methods. No feature engineering or dimensionality reduction, so on and so forth. It aims to answer the lazy question that, "If I do nothing, how far can I get?" By using this package, if you get satisfting results then congradulations! If not, then you know where the baseline is and you might want to do better than that based on your domain knowledge.
-
-🤞 Good luck. 🤞
 ___
 
 ## Documentation
@@ -61,6 +51,16 @@ Check out machine learning algorithms supported and hyperparameters considered.
 | [`XGBClassifier`](https://xgboost.readthedocs.io/en/stable/python/python_api.html) | `xgboost` | `n_estimators`<br>`learning_rate`<br>`max_depth` |
 
 </div>
+
+---
+
+## Why "Baseline" Optimal
+
+The current version supports feature selection, missing value imputation, scaling and encoding as data transformation and processing steps. The pipeline performance is evaluated based on choices of these components along with multiple machine learning algorithms. With help of Optuna, the package gives you the optimal workflow provided the raw data.
+
+The results are "baseline" optimal because the workflow attempts only the most basic methods. No feature engineering or dimensionality reduction, so on and so forth. It aims to answer the lazy question that, "If I do nothing, how far can I get?" By using this package, if you get satisfting results then congradulations! If not, then you know where the baseline is and you might want to do better than that based on your domain knowledge.
+
+🤞 Good luck. 🤞
 
 <!-- ## TODO
 

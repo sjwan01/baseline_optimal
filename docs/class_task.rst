@@ -40,9 +40,9 @@ After fitting the data, one option is to use the ``ClassTask`` object for probab
 
 .. code-block:: python
 
-    pred_prob = study.predict(X=X_test)
+    pred_prob = task.predict(X=X_test)
 
-    scores = study.evaluate(X=X_test, y_true=y_test, threshold=0.5)
+    scores = task.evaluate(X=X_test, y_true=y_test, threshold=0.5)
 
 Or, you may obtain the optimal ``imblearn.pipeline.Pipeline`` object. Check here_.
 
@@ -50,7 +50,7 @@ Or, you may obtain the optimal ``imblearn.pipeline.Pipeline`` object. Check here
 
 .. code-block:: python
 
-    best_pipeline = study.best_pipeline
+    best_pipeline = task.best_pipeline
 
     pred_prob = best_pipeline.predict_proba(X_test)
 
